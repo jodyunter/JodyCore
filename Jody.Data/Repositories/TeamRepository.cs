@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Jody.Domain;
 using Jody.Domain.Repositories;
 
@@ -19,6 +18,11 @@ namespace Jody.Data.Repositories
                 new Team() {Name="Team 5" },
                 new Team() {Name="Team 6" },
             };
+        }
+
+        public Team GetByName(string name)
+        {
+            return GetAll().ToList().Where(t => t.Name.Equals(name)).FirstOrDefault();
         }
     }
 }

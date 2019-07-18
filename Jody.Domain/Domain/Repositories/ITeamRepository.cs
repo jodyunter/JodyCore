@@ -7,5 +7,6 @@ namespace Jody.Domain.Repositories
     public interface ITeamRepository
     {
         IEnumerable<Team> GetAll();
+        Team GetByName(string name);
     }
 }
