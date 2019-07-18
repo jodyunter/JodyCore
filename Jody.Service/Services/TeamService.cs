@@ -31,5 +31,10 @@ namespace Jody.Services
 
             return models;
         }
+
+        public TeamViewModel GetByName(string name)
+        {
+            return Mapper.Map<Team, TeamViewModel>(TeamRepository.GetByName(name));
+        }
     }
 }

@@ -9,21 +9,12 @@ namespace Jody.Test.Services.TestRepositories
     {
         public IEnumerable<Team> GetAll()
         {
-            return new List<Team>()
-            {
-                new Team() {Name="Team 1", Active = true, FirstYear = 1 },
-                new Team() {Name="Team 2", Active = true, FirstYear = 1 },
-                new Team() {Name="Team 3", Active = true, FirstYear = 1 },
-                new Team() {Name="Team 4", Active = false, FirstYear = 1 },
-                new Team() {Name="Team 5", Active = true, FirstYear = 1 },
-                new Team() {Name="Team 6", Active = false, FirstYear = 1 },
-            };
+            throw new System.NotImplementedException();
         }
-
 
         public Team GetByName(string name)
         {
-            return GetAll().ToList().Where(t => t.Name.Equals(name)).FirstOrDefault();
+            throw new System.NotImplementedException();
         }
     }
 }

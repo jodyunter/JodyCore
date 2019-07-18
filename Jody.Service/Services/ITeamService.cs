@@ -8,5 +8,6 @@ namespace Jody.Services
     public interface ITeamService
     {
         IEnumerable<TeamViewModel> GetAll();
+        TeamViewModel GetByName(string name);
     }
 }

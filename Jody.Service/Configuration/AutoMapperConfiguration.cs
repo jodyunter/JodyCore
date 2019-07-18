@@ -10,7 +10,7 @@ namespace Jody.Services.Configuration
         public static MapperConfiguration GetConfiguration()
         {
             var mapperConfiguration = new MapperConfiguration(cfg =>
-            {
+            {                
                 cfg.CreateMap<Team, TeamViewModel>();
                 cfg.CreateMap<TeamViewModel, Team>();
             });

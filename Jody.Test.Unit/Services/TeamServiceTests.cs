@@ -1,10 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using Jody.Domain;
+using Jody.Domain.Repositories;
+using Jody.Services;
+using Jody.Test.Unit.Services.TestConfiguration;
+using Moq;
+using Xunit;
+using static Xunit.Assert;
 namespace Jody.Test.Unit.Services
 {
-    class TeamServiceTests
+    public class TeamServiceTests
     {
+        [Fact]
+        public void ShouldGetTeamByName()
+        {
+            var bindings = new TestServiceConfiguration();
+
+            var team1 = new Team() { Name = "Team 1", Active = false, FirstYear = 15 };
+
+            var teamRepository = new Mock<ITeamRepository>();
+            teamRepository.Setup(x => x.GetByName("Team 1")).Returns(team1);
+
+            var service = new TeamService(teamRepository.Object, bindings.Mapper);
+
+            Equal(team1.Name, service.GetByName("Team 1").Name);
+        }
     }
 }
