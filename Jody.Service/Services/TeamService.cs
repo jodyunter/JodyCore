@@ -2,7 +2,6 @@
 using Jody.ViewModels;
 using System.Linq;
 using System.Collections.Generic;
-using Jody.Services.ModelMappers;
 using AutoMapper;
 using Jody.Domain;
 

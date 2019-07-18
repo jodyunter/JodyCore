@@ -14,13 +14,21 @@ namespace Jody.Test.Unit.Services.ViewModels
             var config = SetupConfigurationForTests();
 
             var name = "Test 1";
-            var data = new Team() { Name = name };
+            bool active = false;
+            int firstYear = 1;
+            var data = new Team() { Name = name, Active = active, FirstYear = firstYear };
             var mapper = config.Mapper;
             
             var model = mapper.Map<Team, TeamViewModel>(data);
 
             Equal(name, model.Name);
+            Equal(active, model.Active);
+            Equal(firstYear, model.FirstYear);
             Equal(name, data.Name);
+            Equal(name, data.Name);
+            Equal(active, data.Active);
+            Equal(firstYear, data.FirstYear);
+
         }
 
         [Fact]
@@ -29,13 +37,20 @@ namespace Jody.Test.Unit.Services.ViewModels
             var config = SetupConfigurationForTests();
 
             var name = "Test 1";
-            var data = new TeamViewModel() { Name = name };
+            bool active = false;
+            int firstYear = 1;
+            var data = new Team() { Name = name, Active = active, FirstYear = firstYear };
             var mapper = config.Mapper;
 
-            var model = mapper.Map<TeamViewModel, Team>(data);
+            var model = mapper.Map<Team, TeamViewModel>(data);
 
             Equal(name, model.Name);
+            Equal(active, model.Active);
+            Equal(firstYear, model.FirstYear);
             Equal(name, data.Name);
+            Equal(name, data.Name);
+            Equal(active, data.Active);
+            Equal(firstYear, data.FirstYear);
         }
 
         private TestServiceConfiguration SetupConfigurationForTests()
