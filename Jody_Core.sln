@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jody_Core", "Jody_Core\Jody_Core.csproj", "{9BD203DB-EED1-4C38-8F04-D0BA2C1E2F57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jody.Domain", "Jody.Domain\Jody.Domain.csproj", "{9BD203DB-EED1-4C38-8F04-D0BA2C1E2F57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jody.Data", "Jody.Data\Jody.Data.csproj", "{BF511154-6BF2-43B4-AA85-9BC524EF4FF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jody.Services", "Jody.Service\Jody.Services.csproj", "{5702CAA1-256E-4A0F-AC1E-962F1C2AE23E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jody.Test.Unit", "Jody.Test.Unit\Jody.Test.Unit.csproj", "{C7F616E3-AACD-4D2A-B334-03738649E6B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jody.Console", "Jody.Console\Jody.Console.csproj", "{512EA988-CE82-428F-BC8C-327DCA411710}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{9BD203DB-EED1-4C38-8F04-D0BA2C1E2F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BD203DB-EED1-4C38-8F04-D0BA2C1E2F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BD203DB-EED1-4C38-8F04-D0BA2C1E2F57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF511154-6BF2-43B4-AA85-9BC524EF4FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF511154-6BF2-43B4-AA85-9BC524EF4FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF511154-6BF2-43B4-AA85-9BC524EF4FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF511154-6BF2-43B4-AA85-9BC524EF4FF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5702CAA1-256E-4A0F-AC1E-962F1C2AE23E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5702CAA1-256E-4A0F-AC1E-962F1C2AE23E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5702CAA1-256E-4A0F-AC1E-962F1C2AE23E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5702CAA1-256E-4A0F-AC1E-962F1C2AE23E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7F616E3-AACD-4D2A-B334-03738649E6B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7F616E3-AACD-4D2A-B334-03738649E6B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7F616E3-AACD-4D2A-B334-03738649E6B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7F616E3-AACD-4D2A-B334-03738649E6B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{512EA988-CE82-428F-BC8C-327DCA411710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{512EA988-CE82-428F-BC8C-327DCA411710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{512EA988-CE82-428F-BC8C-327DCA411710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{512EA988-CE82-428F-BC8C-327DCA411710}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
