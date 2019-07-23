@@ -14,11 +14,14 @@ namespace Jody.Test.Unit.Services
         {
             var bindings = new TestServiceConfiguration();
 
+            //data to return
             var team1 = new Team() { Name = "Team 1", Active = false, FirstYear = 15 };
 
+            //mock the methods we'll use
             var teamRepository = new Mock<ITeamRepository>();
             teamRepository.Setup(x => x.GetByName("Team 1")).Returns(team1);
 
+            //make the service call
             var service = new TeamService(teamRepository.Object, bindings.Mapper);
 
             var model = service.GetByName("Team 1");
