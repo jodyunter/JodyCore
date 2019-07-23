@@ -9,7 +9,7 @@ namespace Jody.Test.Unit.Services
 {
     public class TeamServiceTests
     {
-        [Fact]
+        [Fact]             
         public void ShouldGetTeamByName()
         {
             var bindings = new TestServiceConfiguration();
@@ -21,7 +21,8 @@ namespace Jody.Test.Unit.Services
 
             var service = new TeamService(teamRepository.Object, bindings.Mapper);
 
-            Equal(team1.Name, service.GetByName("Team 1").Name);
+            var model = service.GetByName("Team 1");
+            Equal(team1.Name, model.Name);
         }
     }
 }

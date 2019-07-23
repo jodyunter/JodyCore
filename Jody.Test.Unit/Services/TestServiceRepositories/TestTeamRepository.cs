@@ -3,7 +3,7 @@ using System.Linq;
 using Jody.Domain;
 using Jody.Domain.Repositories;
 
-namespace Jody.Test.Services.TestRepositories
+namespace Jody.Test.Services.TestServiceRepositories
 {
     public class TestTeamRepository : ITeamRepository
     {

@@ -1,7 +1,7 @@
 ﻿
 using Jody.Domain.Repositories;
 using Jody.Services.Configuration;
-using Jody.Test.Services.TestRepositories;
+using Jody.Test.Services.TestServiceRepositories;
 
 namespace Jody.Test.Unit.Services.TestConfiguration
 {
