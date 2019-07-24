@@ -24,23 +24,15 @@ namespace Jody.Domain.Games
             CurrentTime++;
         }
 
+
+        //general play is an action is taken, player that loses the action or completes the action is unavailable for a time
+        //faceoff -> player 
+        //player can carry, pass or shoot
+        //player carries and another tries to check
+        //player passes and another intercepts
+        //player shoots and all remaining players get to try to block, with the best blocker getting first try
         public Action GetNextAction(Action lastAction, int currentPeriod, int currentTime)
         {
-            if (lastAction == null)
-            {
-                return new Action()
-                {
-                    ActionType = ActionType.Faceoff,
-                    Winner = null,
-                    Loser = null,
-                    Period = currentPeriod,
-                    Moment = currentTime + 1,
-                    Order = lastAction.Order++,
-                    PuckCarrier = Home.Centre,
-                    Opponent = Away.Centre
-                };
-            }
-
             return null;
         }
 

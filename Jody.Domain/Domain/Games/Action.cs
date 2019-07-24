@@ -4,9 +4,10 @@ using System.Text;
 
 namespace Jody.Domain.Games
 {
-    public class Action
+    public abstract class Action
     {
         public ActionType ActionType { get; set; }
+        public Game Game { get; set; }
         public GamePlayer PuckCarrier { get; set; }
         public GamePlayer Opponent { get; set; }
         public GamePlayer Winner { get; set; }
@@ -16,5 +17,9 @@ namespace Jody.Domain.Games
         public int Order { get; set; }        
         public GamePlayer WhoGotThePuck { get; set; }
         public bool Processed { get; set; }
+
+        public abstract void GetNextAction(Random random);
+        public abstract void ProcessAction(Random random);
+
     }
 }

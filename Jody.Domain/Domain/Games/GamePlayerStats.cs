@@ -23,6 +23,14 @@ namespace Jody.Domain.Games
         public int FaceOffLoses { get; set; }
         public int FaceOffsTaken { get { return FaceOffWins + FaceOffLoses; } }
 
+        public int CarriesMade { get; set; }
+        public int CarriesFailed { get; set; }
+        public int CarriedAttempted { get { return CarriesFailed + CarriesMade; } }
+
+        public int CheckedMade { get; set; }
+        public int ChecksFailed { get; set; }
+        public int ChecksAttempted { get { return ChecksAttempted + ChecksFailed; } }
+
         public int PassesMade { get; set; }
         public int PassesIntercepted { get; set; }
         public int PassesAttempted { get { return PassesMade + PassesIntercepted; } }

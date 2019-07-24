@@ -26,6 +26,7 @@ namespace Jody.Domain.Games
     {
         Faceoff = 0,  //faceoff win vs faceoff loss
         Pass = 1,   //passer vs interceptor
+        Carry = 2, //puck carrier vs checker
         Block = 3,  //shooter vs blocker
         GoalAttempt = 4 //goal scorer vs saver
     }
