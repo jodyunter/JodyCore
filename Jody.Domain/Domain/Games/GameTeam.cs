@@ -15,7 +15,27 @@ namespace Jody.Domain.Games
         public GamePlayer RightWing { get; set; }
         public GamePlayer RightDefense { get; set; }
         public GamePlayer LeftDefense { get; set; }
-        public GamePlayer Goalie { get; set; }
+        public GamePlayer Goalie { get; set; }       
+        
+        //todo add bench positions
+        public GamePlayer GetPlayerByPosition(Position position)
+        {
+            switch(position)
+            {
+                case Position.Centre:
+                    return Centre;
+                case Position.LeftWing:
+                    return LeftWing;
+                case Position.RightWing:
+                    return RightWing;
+                case Position.LeftDefense:
+                    return LeftDefense;
+                case Position.RightDefense:
+                    return RightDefense;
+                default:
+                    throw new ApplicationException("Can't find position: " + position);
+            }
+        }        
         
     }
 }
