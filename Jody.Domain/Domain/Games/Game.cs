@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jody.Domain.Games.Actions;
+using System;
 
 
 namespace Jody.Domain.Games
@@ -31,8 +32,21 @@ namespace Jody.Domain.Games
         //player carries and another tries to check
         //player passes and another intercepts
         //player shoots and all remaining players get to try to block, with the best blocker getting first try
-        public Action GetNextAction(Action lastAction, int currentPeriod, int currentTime)
+        public Action GetNextAction(Random random, Action lastAction)
         {
+            //if game is done do something
+            //if period is done do something
+            //otherwise process the action
+            if (lastAction == null)
+            {
+                //setup a faceoff
+                //this should have a setup or something
+                var action = new FaceOffAction(this, CurrentPeriod, CurrentTime, lastAction);
+                action.SetupAction(random);
+
+                return action;
+            }
+            
             return null;
         }
 

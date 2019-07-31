@@ -17,9 +17,22 @@ namespace Jody.Domain.Games
         public int Order { get; set; }        
         public GamePlayer WhoGotThePuck { get; set; }
         public bool Processed { get; set; }
+        public Action PreviousAction { get; set; }
 
+        public Action(ActionType actionType, Game game, int period, int moment, Action previousAction)
+        {
+            ActionType = actionType;
+            Game = game;
+            Period = period;
+            Order = previousAction == null ? 1 : previousAction.Order += 1;
+            Moment = moment;
+            PreviousAction = previousAction;
+        }
+
+        public abstract void SetupAction(Random random);
         public abstract void GetNextAction(Random random);
         public abstract void ProcessAction(Random random);
+        
 
     }
 }

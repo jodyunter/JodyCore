@@ -6,16 +6,34 @@ namespace Jody.Domain.Games.Actions
 {
     public class FaceOffAction : Action
     {
-        public override Action GetNextAction()
+
+        public FaceOffAction(Game game, int period, int moment, Action previousAction)
+            :base(ActionType.Faceoff, game, period, moment, previousAction)
         {
-            //next action should be based on the current action, the player preferences, and how many opponents there are
-            
+
+        }
+
+        public override void SetupAction(Random random)
+        {
+            PuckCarrier = Game.Home.Centre;
+            Opponent = Game.Away.Centre;
+        }
+
+        public override void GetNextAction(Random random)
+        {
             throw new NotImplementedException();
         }
 
-        public override void ProcessAction(Action lastAction, Random random)
+        public override void ProcessAction(Random random)
         {
+            //determine winner
+            Winner = PuckCarrier;
+            Loser = Opponent;
+
+            //find the next player
+
             throw new NotImplementedException();
         }
+
     }
 }
