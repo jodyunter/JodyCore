@@ -8,6 +8,7 @@ namespace Jody.Domain
     {
         public string Name { get; set; }
         public Team Team { get; set; }
+        public int Number { get; set; }
         public bool Active { get; set; }
         public int Age { get; set; }
     }

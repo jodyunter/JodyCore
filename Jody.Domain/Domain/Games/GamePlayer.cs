@@ -16,6 +16,13 @@ namespace Jody.Domain.Games
             TimeUntilAvailable = 0;
         }
 
+        public void ReduceTimeUntilAvailable()
+        {
+            if (TimeUntilAvailable > 0)
+            {
+                TimeUntilAvailable--;
+            }
+        }
     }
 
 }

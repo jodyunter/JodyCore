@@ -37,7 +37,7 @@ namespace Jody.Domain.Games
             }
         }
         
-        public bool IsPlayerActive(Position position)
+        public bool IsPlayerAvailable(Position position)
         {
             return GetPlayerByPosition(position).TimeUntilAvailable <= 0;
         }
@@ -51,6 +51,16 @@ namespace Jody.Domain.Games
             RightDefense.MakeAvailable();
             Goalie.MakeAvailable();
 
+        }
+
+        public void ReduceTimeUntilAvailable()
+        {
+            Centre.ReduceTimeUntilAvailable();
+            LeftWing.ReduceTimeUntilAvailable();
+            RightWing.ReduceTimeUntilAvailable();
+            LeftDefense.ReduceTimeUntilAvailable();
+            RightDefense.ReduceTimeUntilAvailable();
+            Goalie.ReduceTimeUntilAvailable();
         }
         
     }
