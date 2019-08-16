@@ -35,7 +35,23 @@ namespace Jody.Domain.Games
                 default:
                     throw new ApplicationException("Can't find position: " + position);
             }
-        }        
+        }
+        
+        public bool IsPlayerActive(Position position)
+        {
+            return GetPlayerByPosition(position).TimeUntilAvailable <= 0;
+        }
+
+        public void MakeAllPlayersAvailable()
+        {
+            Centre.MakeAvailable();
+            LeftWing.MakeAvailable();
+            RightWing.MakeAvailable();
+            LeftDefense.MakeAvailable();
+            RightDefense.MakeAvailable();
+            Goalie.MakeAvailable();
+
+        }
         
     }
 }

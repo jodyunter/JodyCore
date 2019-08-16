@@ -11,6 +11,11 @@ namespace Jody.Domain.Games
         public GamePlayerStats Stats { get; set; }                
         public int TimeUntilAvailable { get; set; }
 
+        public void MakeAvailable()
+        {
+            TimeUntilAvailable = 0;
+        }
+
     }
 
 }

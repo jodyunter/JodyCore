@@ -17,7 +17,10 @@ namespace Jody.Domain.Games
         //game rules, like overtime, total periods, etc
         public void PlayGame(Random random)
         {
-    
+            if (PuckCarrier == null)
+            {
+                MakeAllPlayersAvailable();
+            }
         }
 
         public bool IsGameComplete()
@@ -29,6 +32,19 @@ namespace Jody.Domain.Games
             return false;
         }
 
+        public void RunFaceOff()
+        {
+            var centre1 = Home.Centre;
+            var centre2 = Away.Centre;
+
+            
+        }
+
+        public void MakeAllPlayersAvailable()
+        {
+            Home.MakeAllPlayersAvailable();
+            Away.MakeAllPlayersAvailable();
+        }
 
     }
 }
