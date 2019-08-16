@@ -16,6 +16,7 @@ namespace Jody.Domain.Games
         public int CarrierPoints { get; set; }
         public GamePlayer FirstAssist { get; set; }
         public GamePlayer SecondAssist { get; set; }
+        public GameTeamType Offense { get; set; }
         
         public string GameLog { get; set; }
 

@@ -16,7 +16,7 @@ namespace Jody.Domain.Games
         public GamePlayer RightDefense { get; set; }
         public GamePlayer LeftDefense { get; set; }
         public GamePlayer Goalie { get; set; }       
-        
+        public GameTeamType HomeOrAway { get; set; }
         //todo add bench positions
         public GamePlayer GetPlayerByPosition(Position position)
         {
