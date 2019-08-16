@@ -22,26 +22,6 @@ namespace Jody.Domain.Games
         RightDefense = 5
     }
 
-    public enum ActionType
-    {
-        Faceoff = 0,  //faceoff win vs faceoff loss
-        Pass = 1,   //passer vs interceptor
-        Carry = 2, //puck carrier vs checker
-        Block = 3,  //shooter vs blocker
-        GoalAttempt = 4 //goal scorer vs saver
-    }
-
-    public enum ActionResult
-    {
-        FaceOffWin = 0,
-        PassComplete = 1,
-        Intercepted = 2,
-        ShotBlocked = 3,
-        ShotMissedTheNet = 4,
-        ShotSaved = 5,
-        GoalScored = 6
-    }
-
     public enum GameTeamType
     {
         Home = 0,
