@@ -32,11 +32,19 @@ namespace Jody.Domain.Games
             return false;
         }
 
-        public void RunFaceOff()
+        public void RunFaceOff(Random random)
         {
             var centre1 = Home.Centre;
             var centre2 = Away.Centre;
 
+            if (GetResult(random))
+            {
+                PuckCarrier = centre1;
+            }
+        }
+
+        public void NextAction(Random random)
+        {
             
         }
 
@@ -44,6 +52,11 @@ namespace Jody.Domain.Games
         {
             Home.MakeAllPlayersAvailable();
             Away.MakeAllPlayersAvailable();
+        }
+
+        public bool GetResult(Random random)
+        {
+            return random.Next(26) >= random.Next(26);
         }
 
     }
