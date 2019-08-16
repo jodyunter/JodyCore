@@ -32,11 +32,34 @@ namespace Jody.Domain.Games
                     return LeftDefense;
                 case Position.RightDefense:
                     return RightDefense;
+                case Position.None:
+                    return null;
                 default:
                     throw new ApplicationException("Can't find position: " + position);
             }
         }
         
+        public Position GetPositionFromList(List<Position> positions, Random random)
+        {
+            var available = new List<Position>();
+
+            positions.ForEach(p =>
+            {
+                if (IsPlayerAvailable(p))
+                {
+                    available.Add(p);
+                }
+            });
+
+            if (available.Count > 0)
+            {
+                return available[random.Next(available.Count)];
+            }
+            else
+            {
+                return Position.None;
+            }
+        }
         public bool IsPlayerAvailable(Position position)
         {
             return GetPlayerByPosition(position).TimeUntilAvailable <= 0;

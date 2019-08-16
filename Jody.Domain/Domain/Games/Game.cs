@@ -61,7 +61,7 @@ namespace Jody.Domain.Games
 
         public void AttemptCarry(Random random)
         {
-
+            
         }
 
         public void AttemptPass(Random random)
@@ -69,6 +69,15 @@ namespace Jody.Domain.Games
 
         }
 
+        public void AttemptGoal(Random random)
+        {
+
+        }
+
+        public void Scramble(Random random)
+        {
+
+        }
         public void ChangePossession()
         {
 
@@ -82,9 +91,14 @@ namespace Jody.Domain.Games
             }
             else
             {
-                //AttemptCarry
-                //AttemptPass
-
+                if (GetResult(random))
+                {
+                    AttemptCarry(random);
+                }
+                else
+                {
+                    AttemptPass(random);
+                }
             }
             //at the end
             ProcessAvailability();

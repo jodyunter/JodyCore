@@ -19,7 +19,9 @@ namespace Jody.Domain.Games
         LeftWing = 2,
         RightWing = 3,
         LeftDefense = 4,
-        RightDefense = 5
+        RightDefense = 5,
+        None = 6
+
     }
 
     public enum GameTeamType
