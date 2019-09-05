@@ -12,27 +12,44 @@ namespace Jody.Domain.Games.Actions
         public GamePlayer Winner { get; set; }
         public GamePlayer Loser { get; set; }
 
-        public void Process()
+        public Action(Game game, StreamWriter outputStream)
         {
-            var offense = GetOffense();
-            var defense = GetDefense();
+            Game = game;
+            OutputStream = outputStream;
+        }
+        public void Process(Random random)
+        {
+            PreProcess(random);
+
+            var offense = GetOffense(random);
+            var defense = GetDefense(random);
 
             Log(StartingLog());
 
-            var result = GetResult(offense, defense);
+            var result = GetResult(random, offense, defense);
 
             ProcessResult(result);
             ProcessStat(result, offense, defense);
 
             Log(EndingLog());
         }
+
+        public abstract void PreProcess(Random random);
         public abstract void ProcessStat(bool result, GamePlayer offense, GamePlayer defense);
-        public abstract GamePlayer GetOffense();
-        public abstract GamePlayer GetDefense();
-        public abstract bool DoesOffenseWin(GamePlayer offense, GamePlayer defense);
-        public bool GetResult(GamePlayer offense, GamePlayer defense)
+        public abstract GamePlayer GetOffense(Random random);
+        public abstract GamePlayer GetDefense(Random random);
+        public bool DoesOffenseWin(Random random, GamePlayer offense, GamePlayer defense)
         {
-            var result = DoesOffenseWin(offense, defense);
+            return GetRandomResult(random);
+        }
+
+        public bool GetRandomResult(Random random)
+        {
+            return random.Next(26) >= random.Next(26);
+        }
+        public bool GetResult(Random random, GamePlayer offense, GamePlayer defense)
+        {
+            var result = DoesOffenseWin(random, offense, defense);
 
             if (result)
             {
@@ -48,7 +65,7 @@ namespace Jody.Domain.Games.Actions
             return result;
         }
         public abstract void ProcessResult(bool result);
-        public abstract Action GetNextAction(bool result);
+        public abstract Action GetNextAction(Random random, bool result);
         public abstract string StartingLog();
         public abstract string EndingLog();
 

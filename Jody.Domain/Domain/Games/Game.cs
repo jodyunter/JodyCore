@@ -22,6 +22,15 @@ namespace Jody.Domain.Games
         
         public string GameLog { get; set; }
 
+        public GameTeam GetOffense()
+        {
+            return Offense == GameTeamType.Home ? Home : Away;
+        }
+
+        public GameTeam GetDefense()
+        {
+            return Offense == GameTeamType.Home ? Away : Home;
+        }
         //game rules, like overtime, total periods, etc
         public void PlayGame(Random random)
         {
