@@ -57,7 +57,15 @@ namespace Jody.Domain.Games
 
         public void AttemptShot(Random random)
         {
-
+            //carrier vs available defense
+            if (GetResult(random))
+            {
+                AttemptGoal(random);
+            }
+            else
+            {
+                Scramble(random);
+            }
         }
 
         public void AttemptCarry(Random random)
@@ -72,20 +80,44 @@ namespace Jody.Domain.Games
 
         public void AttemptGoal(Random random)
         {
-
+            //carrier vs goalie
+            if (GetResult(random))
+            {
+                //process goal
+            }
+            else
+            {
+                AttemptFreeze(random);
+            }
         }
 
         public void Scramble(Random random)
         {
-
+            if (GetResult(random))
+            {
+                //reset carrier points
+            }
         }
         public void ChangePossession()
         {
 
         }
 
-        public void NextAction(Random random)
+        public void AttemptFreeze(Random random)
         {
+            //goalie vs self?
+            if (GetResult(random))
+            {
+                RunFaceOff(random);
+            }
+            else
+            {
+                Scramble(random);
+            }
+        }
+
+        public void NextAction(Random random)
+        {            
             if (CarrierPoints > 1)
             {
                 AttemptShot(random);
