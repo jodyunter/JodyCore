@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Jody.Domain.Games.Actions;
+using System;
+using Action = Jody.Domain.Games.Actions.Action;
 
 namespace Jody.Domain.Games
 {
@@ -23,9 +25,15 @@ namespace Jody.Domain.Games
         //game rules, like overtime, total periods, etc
         public void PlayGame(Random random)
         {
-            if (PuckCarrier == null)
+            MakeAllPlayersAvailable();
+            var firstAction = new Faceoff();
+            Action action;
+            action = firstAction;
+
+            while (!IsPeriodComplete())
             {
-                MakeAllPlayersAvailable();
+                action.Process(this);
+                action = action.GetNextAction();
             }
         }
 
@@ -52,6 +60,12 @@ namespace Jody.Domain.Games
                 PuckCarrier = centre1;
                 centre1.Stats.FaceOffWins++;
                 centre2.Stats.FaceOffLoses++;
+                Offense = GameTeamType.Home;
+            }
+            else
+            {
+                PuckCarrier = centre2;
+                centre2.Stats.FaceOffWins++;
             }
         }
 
@@ -153,6 +167,7 @@ namespace Jody.Domain.Games
             Home.ReduceTimeUntilAvailable();
             Away.ReduceTimeUntilAvailable();
         }
+
 
     }
 }
