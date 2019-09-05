@@ -7,6 +7,7 @@ namespace Jody.Domain.Games
     public class GameTeam
     {
         public Game Game { get; set; }
+        public Team Team { get; set; }
         public GameTeamStats Stats { get; set; }
         public IEnumerable<GamePlayer> Roster { get; set; }        
 

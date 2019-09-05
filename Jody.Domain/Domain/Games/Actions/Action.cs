@@ -16,7 +16,7 @@ namespace Jody.Domain.Games.Actions
         public GamePlayer Defense { get; set; }
         public abstract ActionType OffenseActionType { get; }
         public abstract ActionType DefenseActionType { get; }
-        public abstract int GetWinnerTimeOut { get; set; }
+        public abstract int GetWinnerTimeOut { get; }
         public abstract int GetLoserTimeOut { get; }
         public abstract int GetGameTimeSpent { get; }
         public Action(Game game, StreamWriter outputStream)
@@ -30,7 +30,7 @@ namespace Jody.Domain.Games.Actions
             
             var result = GetResult(random, Offense, Defense);            
 
-            ProcessResult(result);
+            ProcessResult(result, random);
             ProcessStat(result, Offense, Defense);
 
             Log(GetLogMessage());  //p1 tries to pass to p2, but p3 intercepts.  p1 passes to p2, p3 misses the interception.
@@ -87,13 +87,13 @@ namespace Jody.Domain.Games.Actions
             //increment game time
             Game.CurrentTime += GetGameTimeSpent;
 
-            ProcessResultsForAction(result, random;
+            ProcessResultsForAction(result, random);
 
         }
 
         public abstract void ProcessResultsForAction(bool result, Random random);
 
-        public abstract Action GetNextAction(Random random, bool result);
+        public abstract Action GetNextAction(Random random);
         public abstract string GetLogMessage();
         
         public void Log(string outputString)

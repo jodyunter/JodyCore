@@ -43,8 +43,8 @@ namespace Jody.Domain.Games
 
             while (!IsPeriodComplete())
             {
-                action.Process(this);
-                action = action.GetNextAction();
+                action.Process(random);
+                action = action.GetNextAction(random);
             }
         }
 

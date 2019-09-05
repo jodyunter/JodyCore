@@ -6,7 +6,7 @@ using System.Text;
 namespace Jody.Domain.Games.Actions
 {
     public class Faceoff : Action
-    {        
+    {
         public List<Position> RecieverList { get; set; }
         public Faceoff(Game game, StreamWriter outputWriter) : base(game, outputWriter)
         {
@@ -38,7 +38,7 @@ namespace Jody.Domain.Games.Actions
             return output;
         }
 
-        public override Action GetNextAction(Random random, bool result)
+        public override Action GetNextAction(Random random)
         {
             if (GetRandomResult(random, 50, 50))
             {
@@ -60,11 +60,11 @@ namespace Jody.Domain.Games.Actions
         {
             if (!result)
             {
-                Game.ChangePossession();                
+                Game.ChangePossession();
             }
             //choose player who gets the puck
             var team = Game.GetOffense();
-            var receiver = team.GetPlayerByPosition(team.GetPositionFromList(RecieverList, random);
+            var receiver = team.GetPlayerByPosition(team.GetPositionFromList(RecieverList, random));
             Game.PuckCarrier = receiver;
             Game.CarrierPoints += 1;
         }
@@ -74,3 +74,4 @@ namespace Jody.Domain.Games.Actions
             throw new NotImplementedException();
         }
     }
+}
