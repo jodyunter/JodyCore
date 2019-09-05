@@ -7,11 +7,18 @@ namespace Jody.Domain.Games.Actions
 {
     public abstract class Action
     {
+        
         public Game Game { get; set; }
         public StreamWriter OutputStream { get; set; }
         public GamePlayer Winner { get; set; }
         public GamePlayer Loser { get; set; }
-
+        public GamePlayer Offense { get; set; }
+        public GamePlayer Defense { get; set; }
+        public abstract ActionType OffenseActionType { get; }
+        public abstract ActionType DefenseActionType { get; }
+        public abstract int GetWinnerTimeOut { get; set; }
+        public abstract int GetLoserTimeOut { get; }
+        public abstract int GetGameTimeSpent { get; }
         public Action(Game game, StreamWriter outputStream)
         {
             Game = game;
@@ -19,33 +26,40 @@ namespace Jody.Domain.Games.Actions
         }
         public void Process(Random random)
         {
-            PreProcess(random);
-
-            var offense = GetOffense(random);
-            var defense = GetDefense(random);
-
-            Log(StartingLog());
-
-            var result = GetResult(random, offense, defense);
+            PreProcess(random);      
+            
+            var result = GetResult(random, Offense, Defense);            
 
             ProcessResult(result);
-            ProcessStat(result, offense, defense);
+            ProcessStat(result, Offense, Defense);
 
-            Log(EndingLog());
+            Log(GetLogMessage());  //p1 tries to pass to p2, but p3 intercepts.  p1 passes to p2, p3 misses the interception.
+        }
+        
+        public void PreProcess(Random random)
+        {
+            //dcrease time on players
+            Game.Home.ReduceTimeUntilAvailable();
+            Game.Away.ReduceTimeUntilAvailable();
+            
+            SetOffense(random);
+            SetDefense(random);
+
+            PreProcessForAction(random);
         }
 
-        public abstract void PreProcess(Random random);
+        public abstract void PreProcessForAction(Random random);
         public abstract void ProcessStat(bool result, GamePlayer offense, GamePlayer defense);
-        public abstract GamePlayer GetOffense(Random random);
-        public abstract GamePlayer GetDefense(Random random);
+        public abstract void SetOffense(Random random);
+        public abstract void SetDefense(Random random);
         public bool DoesOffenseWin(Random random, GamePlayer offense, GamePlayer defense)
         {
-            return GetRandomResult(random);
+            return GetRandomResult(random, offense.GetSkillForActionType(OffenseActionType), defense.GetSkillForActionType(DefenseActionType));
         }
 
-        public bool GetRandomResult(Random random)
+        public bool GetRandomResult(Random random, int offenseValue, int defenseValue)
         {
-            return random.Next(26) >= random.Next(26);
+            return random.Next(offenseValue) >= random.Next(defenseValue);
         }
         public bool GetResult(Random random, GamePlayer offense, GamePlayer defense)
         {
@@ -64,11 +78,24 @@ namespace Jody.Domain.Games.Actions
 
             return result;
         }
-        public abstract void ProcessResult(bool result);
-        public abstract Action GetNextAction(Random random, bool result);
-        public abstract string StartingLog();
-        public abstract string EndingLog();
+        public void ProcessResult(bool result, Random random)
+        {
+            //increment time on players
+            Winner.TimeUntilAvailable += GetWinnerTimeOut;
+            Loser.TimeUntilAvailable += GetLoserTimeOut;
 
+            //increment game time
+            Game.CurrentTime += GetGameTimeSpent;
+
+            ProcessResultsForAction(result, random;
+
+        }
+
+        public abstract void ProcessResultsForAction(bool result, Random random);
+
+        public abstract Action GetNextAction(Random random, bool result);
+        public abstract string GetLogMessage();
+        
         public void Log(string outputString)
         {
             OutputStream.WriteLine(outputString);

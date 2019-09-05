@@ -6,59 +6,71 @@ using System.Text;
 namespace Jody.Domain.Games.Actions
 {
     public class Faceoff : Action
-    {
+    {        
+        public List<Position> RecieverList { get; set; }
         public Faceoff(Game game, StreamWriter outputWriter) : base(game, outputWriter)
         {
-
-        }
-        public override string EndingLog()
-        {
-            throw new NotImplementedException();
+            RecieverList = new List<Position>() { Position.RightDefense, Position.LeftDefense, Position.RightWing, Position.LeftWing };
         }
 
-        public override GamePlayer GetDefense(Random random)
+        public override ActionType OffenseActionType { get { return ActionType.FaceOff; } }
+
+        public override ActionType DefenseActionType { get { return ActionType.FaceOff; } }
+
+        public override int GetWinnerTimeOut { get { return 1; } }
+        public override int GetLoserTimeOut { get { return 1; } }
+        public override int GetGameTimeSpent { get { return 1; } }
+
+        public override void SetDefense(Random random)
         {
-            return Game.Away.Centre;
+            Defense = Game.Away.Centre;
+        }
+        public override void SetOffense(Random random)
+        {
+            Offense = Game.Home.Centre;
+        }
+
+        public override string GetLogMessage()
+        {
+            var output = string.Format("Faceoff! {0} vs {1}\n", Offense.Player.Name, Defense.Player.Name);
+            output += string.Format("{0} wins it back to {1}", Winner.Player.Name, Game.PuckCarrier.Player.Name);
+
+            return output;
         }
 
         public override Action GetNextAction(Random random, bool result)
         {
-            //after a faceoff the options are
-            //carry or pass
-
-            if (GetRandomResult(random))
+            if (GetRandomResult(random, 50, 50))
             {
                 return new Pass(Game, OutputStream);
             }
             else
             {
-                return new Carry(game, OutputStream);
+                return new Carry(Game, OutputStream);
             }
         }
 
-        public override GamePlayer GetOffense(Random random)
+        public override void PreProcessForAction(Random random)
         {
-            return Game.Home.Centre;
+            Game.MakeAllPlayersAvailable();
+            Game.CarrierPoints = 0;
         }
 
-        public override void PreProcess(Random random)
+        public override void ProcessResultsForAction(bool result, Random random)
         {
-            throw new NotImplementedException();
-        }
-
-        public override void ProcessResult(bool result)
-        {
-            throw new NotImplementedException();
+            if (!result)
+            {
+                Game.ChangePossession();                
+            }
+            //choose player who gets the puck
+            var team = Game.GetOffense();
+            var receiver = team.GetPlayerByPosition(team.GetPositionFromList(RecieverList, random);
+            Game.PuckCarrier = receiver;
+            Game.CarrierPoints += 1;
         }
 
         public override void ProcessStat(bool result, GamePlayer offense, GamePlayer defense)
         {
             throw new NotImplementedException();
         }
-
-        public override string StartingLog()
-        {
-            throw new NotImplementedException();
-        }
     }
-}

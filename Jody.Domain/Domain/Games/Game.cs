@@ -1,5 +1,6 @@
 ﻿using Jody.Domain.Games.Actions;
 using System;
+using System.IO;
 using Action = Jody.Domain.Games.Actions.Action;
 
 namespace Jody.Domain.Games
@@ -19,8 +20,9 @@ namespace Jody.Domain.Games
         public GamePlayer FirstAssist { get; set; }
         public GamePlayer SecondAssist { get; set; }
         public GameTeamType Offense { get; set; }
-        
+                
         public string GameLog { get; set; }
+        public StreamWriter Output { get; set; }
 
         public GameTeam GetOffense()
         {
@@ -35,7 +37,7 @@ namespace Jody.Domain.Games
         public void PlayGame(Random random)
         {
             MakeAllPlayersAvailable();
-            var firstAction = new Faceoff();
+            var firstAction = new Faceoff(this, Output);
             Action action;
             action = firstAction;
 
@@ -118,12 +120,13 @@ namespace Jody.Domain.Games
         {
             if (GetResult(random))
             {
-                //reset carrier points
+                //reset carrier points if change of posession
             }
         }
         public void ChangePossession()
         {
-
+            CarrierPoints = 0;
+            Offense = Offense == GameTeamType.Away ? GameTeamType.Home : GameTeamType.Away;
         }
 
         public void AttemptFreeze(Random random)

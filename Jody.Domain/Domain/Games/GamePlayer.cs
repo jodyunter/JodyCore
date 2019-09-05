@@ -23,6 +23,21 @@ namespace Jody.Domain.Games
                 TimeUntilAvailable--;
             }
         }
+
+        public int GetSkillForActionType(ActionType actionType)
+        {
+            switch(actionType)
+            {
+                case ActionType.FaceOff:
+                    return Player.FaceOffSkill;
+                case ActionType.Pass:
+                    return Player.PassingSkill;
+                case ActionType.Intercept:
+                    return Player.InterceptSkill;
+                default:
+                    throw new Exception("No Action Type for " + actionType);
+            }
+        }
     }
 
 }

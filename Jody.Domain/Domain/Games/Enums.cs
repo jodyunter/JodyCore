@@ -38,4 +38,11 @@ namespace Jody.Domain.Games
         Undecided = 3,
         Incomplete = 4
     }
+
+    public enum ActionType
+    {
+        FaceOff = 0,
+        Pass = 1,
+        Intercept = 2
+    }
 }
