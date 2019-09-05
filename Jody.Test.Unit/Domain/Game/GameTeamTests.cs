@@ -10,12 +10,21 @@ namespace Jody.Test.Unit.Domain.Game
     
     public class GameTeamTests
     {
-        [Fact]
-        public void ShouldGetPlayerByPosition()
+        [Theory]
+        [InlineData("Centre Guy", Position.Centre)]
+        [InlineData("Left Wing Guy", Position.LeftWing)]
+        [InlineData("Right Wing Guy", Position.RightWing)]
+        [InlineData("Left Defense Guy", Position.LeftDefense)]
+        [InlineData("Right Defense Guy", Position.RightDefense)]
+        [InlineData("Goalie Guy", Position.Goalie)]
+        public void ShouldGetPlayerByPosition(string expectedName, Position position)
         {
             var team = SetupTeam("Team 1");
-            Equal("Centre Guy", team.GetPlayerByPosition(Position.Centre).Player.Name);
+            Equal(expectedName, team.GetPlayerByPosition(position).Player.Name);
+            Null(team.GetPlayerByPosition(Position.None));
         }
+
+
 
         public GameTeam SetupTeam(string name)
         {

@@ -33,6 +33,8 @@ namespace Jody.Domain.Games
                     return LeftDefense;
                 case Position.RightDefense:
                     return RightDefense;
+                case Position.Goalie:
+                    return Goalie;
                 case Position.None:
                     return null;
                 default:

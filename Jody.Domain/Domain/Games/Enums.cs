@@ -20,7 +20,8 @@ namespace Jody.Domain.Games
         RightWing = 3,
         LeftDefense = 4,
         RightDefense = 5,
-        None = 6
+        Goalie = 6,
+        None = 7
 
     }
 
