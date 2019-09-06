@@ -10,6 +10,20 @@ namespace Jody.Test.Unit.Domain.Game
     
     public class GameTeamTests
     {
+        public static GameTeam SetupTeam(string name)
+        {
+            return new GameTeam()
+            {
+                Team = new Team() { Name = name },
+                Centre = GamePlayerTests.SetupPlayer("Centre Guy"),
+                LeftWing = GamePlayerTests.SetupPlayer("Left Wing Guy"),
+                RightWing = GamePlayerTests.SetupPlayer("Right Wing Guy"),
+                LeftDefense = GamePlayerTests.SetupPlayer("Left Defense Guy"),
+                RightDefense = GamePlayerTests.SetupPlayer("Right Defense Guy"),
+                Goalie = GamePlayerTests.SetupPlayer("Goalie Guy")
+            };
+        }
+
         [Theory]
         [InlineData("Centre Guy", Position.Centre)]
         [InlineData("Left Wing Guy", Position.LeftWing)]
@@ -24,25 +38,63 @@ namespace Jody.Test.Unit.Domain.Game
             Null(team.GetPlayerByPosition(Position.None));
         }
 
-
-
-        public GameTeam SetupTeam(string name)
+        [Theory]
+        [InlineData(Position.Centre, 0, true)]
+        [InlineData(Position.Centre, 15, false)]
+        [InlineData(Position.LeftWing, 0, true)]
+        [InlineData(Position.LeftWing, 15, false)]
+        [InlineData(Position.RightWing, 0, true)]
+        [InlineData(Position.RightWing, 15, false)]
+        [InlineData(Position.LeftDefense, 0, true)]
+        [InlineData(Position.LeftDefense, 15, false)]
+        [InlineData(Position.RightDefense, 0, true)]
+        [InlineData(Position.RightDefense, 15, false)]
+        [InlineData(Position.Goalie, 0, true)]
+        [InlineData(Position.Goalie, 15, false)]
+        public void ShouldTestIsPlayerAvailable(Position position, int timeRemaining, bool expected)
         {
-            return new GameTeam()
-            {
-                Team = new Team() { Name = name },
-                Centre = SetupPlayer("Centre Guy"),
-                LeftWing = SetupPlayer("Left Wing Guy"),
-                RightWing = SetupPlayer("Right Wing Guy"),
-                LeftDefense = SetupPlayer("Left Defense Guy"),
-                RightDefense = SetupPlayer("Right Defense Guy"),
-                Goalie = SetupPlayer("Goalie Guy")
-            };
+            var team = SetupTeam("Team 1");
+            team.GetPlayerByPosition(position).TimeUntilAvailable = timeRemaining;
+            Equal(expected, team.IsPlayerAvailable(position));
 
         }
-        public GamePlayer SetupPlayer(string name)
+
+        [Fact]
+        public void ShouldMakeAllAvailable()
         {
-            return new GamePlayer() { Player = new Player() { Name = name }, TimeUntilAvailable = 0 };
+            var team = SetupTeam("Team 1");
+            team.Centre.TimeUntilAvailable = 15;
+            team.LeftWing.TimeUntilAvailable = 10;
+            team.RightWing.TimeUntilAvailable = 5;
+            team.LeftDefense.TimeUntilAvailable = 25;
+            team.RightDefense.TimeUntilAvailable = 35;
+
+            team.MakeAllPlayersAvailable();
+
+            True(team.IsPlayerAvailable(Position.Centre));
+            True(team.IsPlayerAvailable(Position.LeftWing));
+            True(team.IsPlayerAvailable(Position.RightWing));
+            True(team.IsPlayerAvailable(Position.LeftDefense));
+            True(team.IsPlayerAvailable(Position.RightDefense));
+        }
+
+        [Fact]
+        public void ShouldReduceTimeUntilAvailable()
+        {
+            var team = SetupTeam("Team 1");
+            team.Centre.TimeUntilAvailable = 15;
+            team.LeftWing.TimeUntilAvailable = 10;
+            team.RightWing.TimeUntilAvailable = 5;
+            team.LeftDefense.TimeUntilAvailable = 25;
+            team.RightDefense.TimeUntilAvailable = 35;
+
+            team.ReduceTimeUntilAvailable();
+
+            Equal(14,team.Centre.TimeUntilAvailable);
+            Equal(9, team.LeftWing.TimeUntilAvailable);
+            Equal(4, team.RightWing.TimeUntilAvailable);
+            Equal(24, team.LeftDefense.TimeUntilAvailable);
+            Equal(34, team.RightDefense.TimeUntilAvailable);
         }
     }
 }
