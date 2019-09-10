@@ -70,8 +70,17 @@ namespace Jody.Domain.Games.Actions
         }
 
         public override void ProcessStat(bool result, GamePlayer offense, GamePlayer defense)
-        {
-            throw new NotImplementedException();
+        {            
+            if (result)
+            {
+                offense.Stats.FaceOffWins++;
+                defense.Stats.FaceOffLoses++;
+            }
+            else
+            {
+                defense.Stats.FaceOffWins++;
+                offense.Stats.FaceOffLoses++;
+            }
         }
     }
 }

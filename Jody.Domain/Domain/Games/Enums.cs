@@ -44,6 +44,12 @@ namespace Jody.Domain.Games
     {
         FaceOff = 0,
         Pass = 1,
-        Intercept = 2
+        Intercept = 2,
+        Carry = 3,
+        Shoot = 4,
+        Score = 5,
+        Save = 6,
+        Freeze = 7,
+        Scramble = 8
     }
 }

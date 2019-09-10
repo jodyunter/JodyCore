@@ -5,6 +5,8 @@ using static Xunit.Assert;
 using Xunit;
 using Jody.Domain.Games;
 using Jody.Domain;
+using System.Linq;
+
 
 namespace Jody.Test.Unit.Domain.Game
 {
@@ -16,9 +18,13 @@ namespace Jody.Test.Unit.Domain.Game
         }
 
         public static GamePlayer SetupPlayer(string name, int timeUntilAvailable)
-        {
-            return new GamePlayer() { Player = new Player() { Name = name }, TimeUntilAvailable = timeUntilAvailable };
+        {            
+            return new GamePlayer() {
+                Player = new Player() { Name = name },
+                TimeUntilAvailable = timeUntilAvailable
+            };
         }
+        
 
         [Fact]
         public void ShouldMakeAvailable()
@@ -49,6 +55,20 @@ namespace Jody.Test.Unit.Domain.Game
             Equal(0, player.TimeUntilAvailable);
             player.ReduceTimeUntilAvailable();
             Equal(0, player.TimeUntilAvailable);
+        }
+
+        [Fact]
+        public void ShouldGetSkillForActionType()
+        {
+            var player = SetupPlayer("My Player");
+            
+            //verify each has a value
+            foreach (var item in Enum.GetValues(typeof(ActionType)))
+            {
+                True(player.GetSkillForActionType((ActionType)item) >= 0);
+            }
+
+            throw new NotImplementedException();
         }
     }
 }
