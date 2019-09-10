@@ -56,9 +56,9 @@ namespace Jody.Domain.Games.Actions
             Game.CarrierPoints = 0;
         }
 
-        public override void ProcessResultsForAction(bool result, Random random)
+        public override void ProcessResultsForAction(Random random)
         {
-            if (!result)
+            if (!Result)
             {
                 Game.ChangePossession();
             }
@@ -70,9 +70,9 @@ namespace Jody.Domain.Games.Actions
             Game.CarrierPoints += 1;
         }
 
-        public override void ProcessStat(bool result, GamePlayer offense, GamePlayer defense)
+        public override void ProcessStat(GamePlayer offense, GamePlayer defense)
         {            
-            if (result)
+            if (Result)
             {
                 offense.Stats.FaceOffWins++;
                 defense.Stats.FaceOffLoses++;

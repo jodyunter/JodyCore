@@ -19,6 +19,8 @@ namespace Jody.Domain.Games.Actions
         public abstract int GetWinnerTimeOut { get; }
         public abstract int GetLoserTimeOut { get; }
         public abstract int GetGameTimeSpent { get; }
+
+        public bool Result { get; set; }
         public Action(Game game, StreamWriter outputStream)
         {
             Game = game;
@@ -28,10 +30,10 @@ namespace Jody.Domain.Games.Actions
         {
             PreProcess(random);      
             
-            var result = GetResult(random, Offense, Defense);            
+            Result = GetResult(random);            
 
-            ProcessResult(result, random);
-            ProcessStat(result, Offense, Defense);
+            ProcessResult(random);
+            ProcessStat(Offense, Defense);
 
             Log(GetLogMessage());  //p1 tries to pass to p2, but p3 intercepts.  p1 passes to p2, p3 misses the interception.
         }
@@ -49,36 +51,37 @@ namespace Jody.Domain.Games.Actions
         }
 
         public abstract void PreProcessForAction(Random random);
-        public abstract void ProcessStat(bool result, GamePlayer offense, GamePlayer defense);
+        public abstract void ProcessStat(GamePlayer offense, GamePlayer defense);
         public abstract void SetOffense(Random random);
         public abstract void SetDefense(Random random);
-        public bool DoesOffenseWin(Random random, GamePlayer offense, GamePlayer defense)
+        public bool DoesOffenseWin(Random random)
         {
-            return GetRandomResult(random, offense.GetSkillForActionType(OffenseActionType), defense.GetSkillForActionType(DefenseActionType));
+            var defenseValue = Defense == null ? 0; Defense.GetSkillForActionType(DefenseActionType);
+            return GetRandomResult(random, Offense.GetSkillForActionType(OffenseActionType), defenseValue);
         }
 
         public bool GetRandomResult(Random random, int offenseValue, int defenseValue)
         {
             return random.Next(offenseValue) >= random.Next(defenseValue);
         }
-        public bool GetResult(Random random, GamePlayer offense, GamePlayer defense)
+        public bool GetResult(Random random)
         {
-            var result = DoesOffenseWin(random, offense, defense);
+            var result = DoesOffenseWin(random);
 
             if (result)
             {
-                Winner = offense;
-                Loser = defense;
+                Winner = Offense;
+                Loser = Defense;
             }
             else
             {
-                Winner = defense;
-                Loser = offense;
+                Winner = Defense;
+                Loser = Offense;
             }
 
             return result;
         }
-        public void ProcessResult(bool result, Random random)
+        public void ProcessResult(Random random)
         {
             //increment time on players
             Winner.TimeUntilAvailable += GetWinnerTimeOut;
@@ -87,11 +90,11 @@ namespace Jody.Domain.Games.Actions
             //increment game time
             Game.CurrentTime += GetGameTimeSpent;
 
-            ProcessResultsForAction(result, random);
+            ProcessResultsForAction(random);
 
         }
 
-        public abstract void ProcessResultsForAction(bool result, Random random);
+        public abstract void ProcessResultsForAction(Random random);
 
         public abstract Action GetNextAction(Random random);
         public abstract string GetLogMessage();
