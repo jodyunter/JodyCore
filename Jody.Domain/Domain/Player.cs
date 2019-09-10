@@ -16,5 +16,7 @@ namespace Jody.Domain
         public int FaceOffSkill { get; set; }
         public int InterceptSkill { get; set; }
         public int PassingSkill { get; set; }        
+        public int CarrySkill { get; set; }
+        public int ForeCheckSkill { get; set; }
     }
 }

@@ -64,7 +64,8 @@ namespace Jody.Domain.Games.Actions
             }
             //choose player who gets the puck
             var team = Game.GetOffense();
-            var receiver = team.GetPlayerByPosition(team.GetPositionFromList(RecieverList, random));            
+            var receiverPosition = team.GetPositionFromList(RecieverList, random);
+            var receiver = team.GetPlayerByPosition(receiverPosition);            
             Game.PuckCarrier = receiver;
             Game.CarrierPoints += 1;
         }

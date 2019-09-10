@@ -19,8 +19,17 @@ namespace Jody.Test.Unit.Domain.Game
 
         public static GamePlayer SetupPlayer(string name, int timeUntilAvailable)
         {            
-            return new GamePlayer() {
-                Player = new Player() { Name = name },
+            return new GamePlayer()
+            {
+                Player = new Player()
+                {
+                    Name = name,
+                    FaceOffSkill = 1,
+                    InterceptSkill = 2,
+                    PassingSkill = 3,
+                    CarrySkill = 4,
+                    ForeCheckSkill = 5
+                },
                 TimeUntilAvailable = timeUntilAvailable
             };
         }
@@ -61,14 +70,20 @@ namespace Jody.Test.Unit.Domain.Game
         public void ShouldGetSkillForActionType()
         {
             var player = SetupPlayer("My Player");
-            
+
+            Equal(1, player.GetSkillForActionType(ActionType.FaceOff));
+            Equal(2, player.GetSkillForActionType(ActionType.Intercept));
+            Equal(3, player.GetSkillForActionType(ActionType.Pass));
+            Equal(4, player.GetSkillForActionType(ActionType.Carry));
+            Equal(5, player.GetSkillForActionType(ActionType.ForeCheck));
+
             //verify each has a value
             foreach (var item in Enum.GetValues(typeof(ActionType)))
             {
                 True(player.GetSkillForActionType((ActionType)item) >= 0);
             }
 
-            throw new NotImplementedException();
+            
         }
     }
 }

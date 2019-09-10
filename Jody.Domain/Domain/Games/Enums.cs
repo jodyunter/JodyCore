@@ -50,6 +50,7 @@ namespace Jody.Domain.Games
         Score = 5,
         Save = 6,
         Freeze = 7,
-        Scramble = 8
+        Scramble = 8,
+        ForeCheck = 9
     }
 }

@@ -22,8 +22,7 @@ namespace Jody.Test.Unit.Domain.Game.Actions
         {
             var faceoff = CreateFaceOff();
 
-            Equal(5, faceoff.RecieverList.Count);
-            Single(faceoff.RecieverList.Where(r => r == Position.Centre).ToList());
+            Equal(4, faceoff.RecieverList.Count);            
             Single(faceoff.RecieverList.Where(r => r == Position.LeftWing).ToList());
             Single(faceoff.RecieverList.Where(r => r == Position.RightWing).ToList());
             Single(faceoff.RecieverList.Where(r => r == Position.LeftDefense).ToList());

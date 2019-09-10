@@ -34,6 +34,10 @@ namespace Jody.Domain.Games
                     return Player.PassingSkill;
                 case ActionType.Intercept:
                     return Player.InterceptSkill;
+                case ActionType.ForeCheck:
+                    return Player.ForeCheckSkill;
+                case ActionType.Carry:
+                    return Player.CarrySkill;                    
                 default:
                     throw new Exception("No Action Type for " + actionType);
             }
