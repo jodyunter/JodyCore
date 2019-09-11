@@ -63,7 +63,7 @@ namespace Jody.Domain.Games.Actions
 
         public override void PreProcessForAction(Random random)
         {
-            throw new NotImplementedException();
+            //nothing to do
         }
 
         public override void ProcessResultsForAction(Random random)
