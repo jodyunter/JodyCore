@@ -40,6 +40,7 @@ namespace Jody.Domain.Games.Actions
 
         public override Action GetNextAction(Random random)
         {
+            var result = GetRandomResult(random, 0, 1);
             if (GetRandomResult(random, 50, 50))
             {
                 return new Pass(Game, OutputStream);

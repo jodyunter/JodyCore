@@ -46,7 +46,19 @@ namespace Jody.Domain.Games.Actions
         public override Action GetNextAction(Random random)
         {
             //pass, carry or shoot
-            throw new NotImplementedException();
+            var result = GetRandomValueFromRange(random, 0, 2);
+
+            switch(result)
+            {
+                case 0:
+                    return new Pass(Game, OutputStream);
+                case 1:
+                    return new Carry(Game, OutputStream);
+                case 2:
+                    return new Shoot(Game, OutputStream);
+                default:
+                    throw new Exception("Bad result in Pass.GetNextAction : " + result);
+            }            
         }
 
         public override void PreProcessForAction(Random random)

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Jody.Domain.Games.Actions
 {
-    public class Carry:Action
+    public class Shoot:Action
     {
-        public Carry(Game game, StreamWriter outputWriter) : base(game, outputWriter)
+        public Shoot(Game game, StreamWriter outputWriter) : base(game, outputWriter)
         {
 
         }
@@ -29,6 +29,16 @@ namespace Jody.Domain.Games.Actions
 
         public override Action GetNextAction(Random random)
         {
+            if (Result)
+            {
+                //try to score
+                return new Score(Game, OutputStream);
+            }
+            else
+            {
+                //scramble
+                return new Scramble(Game, OutputStream);
+            }
             throw new NotImplementedException();
         }
 
