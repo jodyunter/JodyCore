@@ -7,7 +7,7 @@ namespace Jody.Domain.Games.Actions
 {
     public abstract class Action
     {
-        
+        public static List<Position> AllPlayingPositionsButGoalie = new List<Position>() { Position.Centre, Position.LeftWing, Position.RightWing, Position.LeftDefense, Position.RightDefense };
         public Game Game { get; set; }
         public StreamWriter OutputStream { get; set; }
         public GamePlayer Winner { get; set; }
@@ -56,7 +56,9 @@ namespace Jody.Domain.Games.Actions
         public abstract void SetDefense(Random random);
         public bool DoesOffenseWin(Random random)
         {
-            var defenseValue = Defense == null ? 0; Defense.GetSkillForActionType(DefenseActionType);
+            var defenseValue = Defense == null ? 0: Defense.GetSkillForActionType(DefenseActionType);
+            var offenseValue = Offense == null ? 0 : Offense.GetSkillForActionType(OffenseActionType);
+
             return GetRandomResult(random, Offense.GetSkillForActionType(OffenseActionType), defenseValue);
         }
 

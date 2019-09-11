@@ -39,7 +39,18 @@ namespace Jody.Domain.Games.Actions
 
         public override void ProcessResultsForAction(Random random)
         {
-            throw new NotImplementedException();
+            //if the defense team wins, change possession
+            //if the offense team wins, continue
+            if (!Result)
+            {
+                Game.ChangePossession();
+                Game.PuckCarrier = Defense;
+            }
+            else
+            {
+                Game.PuckCarrier = Offense;
+            }
+            
         }
 
         public override void ProcessStat(GamePlayer offense, GamePlayer defense)
@@ -49,12 +60,12 @@ namespace Jody.Domain.Games.Actions
 
         public override void SetDefense(Random random)
         {
-            throw new NotImplementedException();
+            Game.GetDefense().GetPositionFromList(AllPlayingPositionsButGoalie, random);
         }
 
         public override void SetOffense(Random random)
         {
-            throw new NotImplementedException();
+            Game.GetOffense().GetPositionFromList(AllPlayingPositionsButGoalie, random);
         }
     }
 }
