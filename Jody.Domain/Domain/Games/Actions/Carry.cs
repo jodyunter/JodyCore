@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Jody.Domain.Games.Actions
 {
-    public class Carry : Action
+    public class Carry : HockeyAction
     {
         public Carry(Game game, StreamWriter outputWriter) : base(game, outputWriter)
         {
@@ -20,14 +20,11 @@ namespace Jody.Domain.Games.Actions
 
         public override int GetLoserTimeOut { get { return 3; } } 
 
-        public override int GetGameTimeSpent { get { return 1; } } 
+        public override int GetGameTimeSpent { get { return 1; } }
+
+        public override ActionType ActionType { get => throw new NotImplementedException(); }
 
         public override string GetLogMessage()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Action GetNextAction(Random random)
         {
             throw new NotImplementedException();
         }

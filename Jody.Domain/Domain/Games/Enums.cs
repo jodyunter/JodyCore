@@ -58,7 +58,9 @@ namespace Jody.Domain.Games
 
         Freeze = 9,  //this will be the goal vs themselves
 
-        Scramble = 10
+        Scramble = 10,
+        
+        BeginGame = 99
 
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Jody.Domain.Games.Actions
 {
-    public class Score:Action
+    public class Score:HockeyAction
     {
         public Score(Game game, StreamWriter outputWriter) : base(game, outputWriter)
         {
@@ -22,12 +22,9 @@ namespace Jody.Domain.Games.Actions
 
         public override int GetGameTimeSpent => throw new NotImplementedException();
 
-        public override string GetLogMessage()
-        {
-            throw new NotImplementedException();
-        }
+        public override ActionType ActionType => throw new NotImplementedException();
 
-        public override Action GetNextAction(Random random)
+        public override string GetLogMessage()
         {
             throw new NotImplementedException();
         }

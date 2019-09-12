@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Jody.Domain.Games.Actions
 {
-    public class Pass:Action
+    public class Pass:HockeyAction
     {
         public List<Position> RecieverList { get; set; }
         //passing has a third player involved, will need to override approrpiately
@@ -28,6 +28,8 @@ namespace Jody.Domain.Games.Actions
 
         public override int GetGameTimeSpent { get { return 1; } }
 
+        public override ActionType ActionType => throw new NotImplementedException();
+
         public override string GetLogMessage()
         {
             if (Result)
@@ -41,24 +43,6 @@ namespace Jody.Domain.Games.Actions
                 return "Pass Intercepted message";
             }
             
-        }
-
-        public override Action GetNextAction(Random random)
-        {
-            //pass, carry or shoot
-            var result = GetRandomValueFromRange(random, 0, 2);
-
-            switch(result)
-            {
-                case 0:
-                    return new Pass(Game, OutputStream);
-                case 1:
-                    return new Carry(Game, OutputStream);
-                case 2:
-                    return new Shoot(Game, OutputStream);
-                default:
-                    throw new Exception("Bad result in Pass.GetNextAction : " + result);
-            }            
         }
 
         public override void ProcessResultsForAction(Random random)

@@ -19,6 +19,7 @@ namespace Jody.Domain.Games.Actions
         public abstract int GetWinnerTimeOut { get; }
         public abstract int GetLoserTimeOut { get; }
         public abstract int GetGameTimeSpent { get; }
+        public abstract ActionType ActionType { get; }
 
         public bool Result { get; set; }
         public Action(Game game, StreamWriter outputStream)
@@ -110,12 +111,21 @@ namespace Jody.Domain.Games.Actions
 
         public abstract void ProcessResultsForAction(Random random);
 
-        public abstract Action GetNextAction(Random random);
+        public abstract Action GetNextAction(Random random, Action previousAction);
+        public abstract Action CreateAction(ActionType actionType, Action previousAction);
         public abstract string GetLogMessage();
         
         public void Log(string outputString)
         {
             OutputStream.WriteLine(outputString);
         }        
+
+        public ActionType ChooseAction(Random random, params ActionType[] possibleActions)
+        {
+            var num = GetRandomValueFromRange(random, 0, possibleActions.Length);
+
+            return possibleActions[num];
+        }
+
     }
 }

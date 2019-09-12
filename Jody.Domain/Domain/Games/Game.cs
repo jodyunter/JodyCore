@@ -44,7 +44,7 @@ namespace Jody.Domain.Games
             while (!IsPeriodComplete())
             {
                 action.Process(random);
-                action = action.GetNextAction(random);
+                action = action.GetNextAction(random, action);
             }
         }
 

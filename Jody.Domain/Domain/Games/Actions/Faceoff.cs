@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Jody.Domain.Games.Actions
 {
-    public class Faceoff : Action
+    public class Faceoff : HockeyAction
     {
         public List<Position> RecieverList { get; set; }
         public Faceoff(Game game, StreamWriter outputWriter) : base(game, outputWriter)
@@ -20,6 +20,8 @@ namespace Jody.Domain.Games.Actions
         public override int GetWinnerTimeOut { get { return 5; } }
         public override int GetLoserTimeOut { get { return 5; } }
         public override int GetGameTimeSpent { get { return 1; } }
+
+        public override ActionType ActionType => throw new NotImplementedException();
 
         public override void SetDefense(Random random)
         {
@@ -36,19 +38,6 @@ namespace Jody.Domain.Games.Actions
             output += string.Format("{0} wins it back to {1}", Winner.Player.Name, Game.PuckCarrier.Player.Name);
 
             return output;
-        }
-
-        public override Action GetNextAction(Random random)
-        {
-            var result = GetRandomResult(random, 0, 1);
-            if (GetRandomResult(random, 50, 50))
-            {
-                return new Pass(Game, OutputStream);
-            }
-            else
-            {
-                return new Carry(Game, OutputStream);
-            }
         }
 
         public override void PreProcessForAction(Random random)

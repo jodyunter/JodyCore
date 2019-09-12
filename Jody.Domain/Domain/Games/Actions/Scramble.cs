@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Jody.Domain.Games.Actions
 {
-    public class Scramble:Action
+    public class Scramble:HockeyAction
     {
         public Scramble(Game game, StreamWriter outputWriter) : base(game, outputWriter)
         {
@@ -22,6 +22,8 @@ namespace Jody.Domain.Games.Actions
 
         public override int GetGameTimeSpent { get { return 1; } }
 
+        public override ActionType ActionType => throw new NotImplementedException();
+
         public override string GetLogMessage()
         {
             var output = string.Format("Scramble!");
@@ -29,30 +31,6 @@ namespace Jody.Domain.Games.Actions
 
             return output;
 
-        }
-
-        public override Action GetNextAction(Random random)
-        {
-            if (Offense == null && Defense == null)
-            {
-                return new Faceoff(Game, OutputStream);
-            }
-            else
-            {
-                var value = GetRandomValueFromRange(random, 0, 2);
-
-                switch(value)
-                {
-                    case 0:
-                        return new Carry(Game, OutputStream);
-                    case 1:
-                        return new Pass(Game, OutputStream);
-                    case 2:
-                        return new Shoot(Game, OutputStream);
-                    default:
-                        throw new Exception("Value: " + value + " could not be processed in GetNextAction in Scramble");
-                }
-            }            
         }
 
         public override void ProcessResultsForAction(Random random)
