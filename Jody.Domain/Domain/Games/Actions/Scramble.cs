@@ -12,35 +12,53 @@ namespace Jody.Domain.Games.Actions
 
         }
 
-        public override ActionType OffenseActionType => throw new NotImplementedException();
+        public override ActionType OffenseActionType { get { return ActionType.Scramble; } }
 
-        public override ActionType DefenseActionType => throw new NotImplementedException();
+        public override ActionType DefenseActionType { get { return ActionType.Scramble; } }
 
-        public override int GetWinnerTimeOut => throw new NotImplementedException();
+        public override int GetWinnerTimeOut { get { return 0; } }
 
-        public override int GetLoserTimeOut => throw new NotImplementedException();
+        public override int GetLoserTimeOut { get { return 5; } }
 
-        public override int GetGameTimeSpent => throw new NotImplementedException();
+        public override int GetGameTimeSpent { get { return 1; } }
 
         public override string GetLogMessage()
         {
-            throw new NotImplementedException();
+            var output = string.Format("Scramble!");
+            output += string.Format("{0} gets to it before {1}", Winner.Player.Name, Game.PuckCarrier.Player.Name);
+
+            return output;
+
         }
 
         public override Action GetNextAction(Random random)
         {
-            throw new NotImplementedException();
-        }
+            if (Offense == null && Defense == null)
+            {
+                return new Faceoff(Game, OutputStream);
+            }
+            else
+            {
+                var value = GetRandomValueFromRange(random, 0, 2);
 
-        public override void PreProcessForAction(Random random)
-        {
-            throw new NotImplementedException();
+                switch(value)
+                {
+                    case 0:
+                        return new Carry(Game, OutputStream);
+                    case 1:
+                        return new Pass(Game, OutputStream);
+                    case 2:
+                        return new Shoot(Game, OutputStream);
+                    default:
+                        throw new Exception("Value: " + value + " could not be processed in GetNextAction in Scramble");
+                }
+            }            
         }
 
         public override void ProcessResultsForAction(Random random)
         {
             //if the defense team wins, change possession
-            //if the offense team wins, continue
+            //if the offense team wins, continue            
             if (!Result)
             {
                 Game.ChangePossession();
@@ -49,14 +67,10 @@ namespace Jody.Domain.Games.Actions
             else
             {
                 Game.PuckCarrier = Offense;
-            }
-            
+                Game.CarrierPoints += 1;
+            }            
         }
 
-        public override void ProcessStat(GamePlayer offense, GamePlayer defense)
-        {
-            throw new NotImplementedException();
-        }
 
         public override void SetDefense(Random random)
         {

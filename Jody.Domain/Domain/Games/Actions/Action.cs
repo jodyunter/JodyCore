@@ -6,7 +6,7 @@ using System.Text;
 namespace Jody.Domain.Games.Actions
 {
     public abstract class Action
-    {
+    {        
         public static List<Position> AllPlayingPositionsButGoalie = new List<Position>() { Position.Centre, Position.LeftWing, Position.RightWing, Position.LeftDefense, Position.RightDefense };
         public Game Game { get; set; }
         public StreamWriter OutputStream { get; set; }
@@ -50,8 +50,15 @@ namespace Jody.Domain.Games.Actions
             PreProcessForAction(random);
         }
 
-        public abstract void PreProcessForAction(Random random);
-        public abstract void ProcessStat(GamePlayer offense, GamePlayer defense);
+        public virtual void PreProcessForAction(Random random)
+        {
+            //by default do nothing
+        }
+        public void ProcessStat(GamePlayer offense, GamePlayer defense)
+        {
+            offense.ChangeValueForActionType(OffenseActionType, Result, 1);
+            defense.ChangeValueForActionType(DefenseActionType, !Result, 1);
+        }
         public abstract void SetOffense(Random random);
         public abstract void SetDefense(Random random);
         public bool DoesOffenseWin(Random random)
@@ -91,8 +98,8 @@ namespace Jody.Domain.Games.Actions
         public void ProcessResult(Random random)
         {
             //increment time on players
-            Winner.TimeUntilAvailable += GetWinnerTimeOut;
-            Loser.TimeUntilAvailable += GetLoserTimeOut;
+            if (Winner != null) Winner.TimeUntilAvailable += GetWinnerTimeOut;
+            if (Loser != null) Loser.TimeUntilAvailable += GetLoserTimeOut;
 
             //increment game time
             Game.CurrentTime += GetGameTimeSpent;

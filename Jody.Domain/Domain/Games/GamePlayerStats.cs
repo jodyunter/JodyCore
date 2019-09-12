@@ -27,9 +27,9 @@ namespace Jody.Domain.Games
         public int CarriesFailed { get; set; }
         public int CarriedAttempted { get { return CarriesFailed + CarriesMade; } }
 
-        public int CheckedMade { get; set; }
-        public int ChecksFailed { get; set; }
-        public int ChecksAttempted { get { return ChecksAttempted + ChecksFailed; } }
+        public int ForeChecksMade { get; set; }
+        public int ForeChecksFailed { get; set; }
+        public int ForeChecksAttempted { get { return ForeChecksMade+ ForeChecksFailed; } }
 
         public int PassesMade { get; set; }
         public int PassesIntercepted { get; set; }
@@ -41,10 +41,12 @@ namespace Jody.Domain.Games
 
         public int ShotsOnGoal { get; set; }
         public int ShotsBlocked { get; set; }
-        public int ShotsMissed { get; set; }
-        public int GoalsScored { get; set; }
+        public int ShotsTaken { get { return ShotsOnGoal + ShotsBlocked; } }
         public int ShotsSaved { get; set; }
-        public int ShotsTaken { get { return ShotsOnGoal + ShotsBlocked + ShotsMissed + ShotsSaved + GoalsScored; } }
+
+        public int GoalsScored { get; set; }
+        public int SavedShots { get; set; }
+        
 
         public int BlockedShots { get; set; }
         public int BlocksMissed { get; set; }
@@ -53,6 +55,13 @@ namespace Jody.Domain.Games
         public int GoalsAllowed { get; set; }
         public int SavesMade { get; set; }
         public int ShotsAgainst { get { return GoalsAllowed + SavesMade; } }
+        public int Freezes { get; set; }
+        public int FreezesFailed { get; set; }
+        public int FreezesAttempted { get { return Freezes + FreezesFailed; } }
+
+        public int ScramblesWon { get; set; }
+        public int ScramblesLost { get; set; }
+        public int ScramblesTotal { get { return ScramblesLost + ScramblesWon; } }
         
     }
 }

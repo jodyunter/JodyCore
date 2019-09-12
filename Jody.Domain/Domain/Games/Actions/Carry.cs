@@ -5,22 +5,22 @@ using System.Text;
 
 namespace Jody.Domain.Games.Actions
 {
-    public class Carry:Action
+    public class Carry : Action
     {
         public Carry(Game game, StreamWriter outputWriter) : base(game, outputWriter)
         {
 
         }
 
-        public override ActionType OffenseActionType => throw new NotImplementedException();
+        public override ActionType OffenseActionType { get { return ActionType.Carry; } }
 
-        public override ActionType DefenseActionType => throw new NotImplementedException();
+        public override ActionType DefenseActionType { get { return ActionType.ForeCheck; } }
 
-        public override int GetWinnerTimeOut => throw new NotImplementedException();
+        public override int GetWinnerTimeOut { get { return 0; } }
 
-        public override int GetLoserTimeOut => throw new NotImplementedException();
+        public override int GetLoserTimeOut { get { return 3; } } 
 
-        public override int GetGameTimeSpent => throw new NotImplementedException();
+        public override int GetGameTimeSpent { get { return 1; } } 
 
         public override string GetLogMessage()
         {
@@ -32,17 +32,7 @@ namespace Jody.Domain.Games.Actions
             throw new NotImplementedException();
         }
 
-        public override void PreProcessForAction(Random random)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void ProcessResultsForAction(Random random)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void ProcessStat(GamePlayer offense, GamePlayer defense)
         {
             throw new NotImplementedException();
         }

@@ -17,8 +17,8 @@ namespace Jody.Domain.Games.Actions
 
         public override ActionType DefenseActionType { get { return ActionType.FaceOff; } }
 
-        public override int GetWinnerTimeOut { get { return 1; } }
-        public override int GetLoserTimeOut { get { return 1; } }
+        public override int GetWinnerTimeOut { get { return 5; } }
+        public override int GetLoserTimeOut { get { return 5; } }
         public override int GetGameTimeSpent { get { return 1; } }
 
         public override void SetDefense(Random random)
@@ -53,6 +53,8 @@ namespace Jody.Domain.Games.Actions
 
         public override void PreProcessForAction(Random random)
         {
+            base.PreProcessForAction(random);
+
             Game.MakeAllPlayersAvailable();
             Game.CarrierPoints = 0;
         }
@@ -69,20 +71,6 @@ namespace Jody.Domain.Games.Actions
             var receiver = team.GetPlayerByPosition(receiverPosition);            
             Game.PuckCarrier = receiver;
             Game.CarrierPoints += 1;
-        }
-
-        public override void ProcessStat(GamePlayer offense, GamePlayer defense)
-        {            
-            if (Result)
-            {
-                offense.Stats.FaceOffWins++;
-                defense.Stats.FaceOffLoses++;
-            }
-            else
-            {
-                defense.Stats.FaceOffWins++;
-                offense.Stats.FaceOffLoses++;
-            }
         }
     }
 }

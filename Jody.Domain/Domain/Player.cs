@@ -18,5 +18,10 @@ namespace Jody.Domain
         public int PassingSkill { get; set; }        
         public int CarrySkill { get; set; }
         public int ForeCheckSkill { get; set; }
+        public int ShootingSkill { get; internal set; }
+        public int BlockingSkill { get; internal set; }
+        public int ScoringSkill { get; internal set; }
+        public int SavingSkill { get; internal set; }
+        public int FreezingSkill { get; internal set; }
     }
 }

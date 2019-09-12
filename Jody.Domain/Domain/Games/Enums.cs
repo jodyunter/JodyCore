@@ -43,14 +43,22 @@ namespace Jody.Domain.Games
     public enum ActionType
     {
         FaceOff = 0,
+
         Pass = 1,
         Intercept = 2,
+
         Carry = 3,
-        Shoot = 4,
-        Score = 5,
-        Save = 6,
-        Freeze = 7,
-        Scramble = 8,
-        ForeCheck = 9
+        ForeCheck = 4,
+
+        Shoot = 5,
+        Block = 6,
+
+        Score = 7,
+        Save = 8,
+
+        Freeze = 9,  //this will be the goal vs themselves
+
+        Scramble = 10
+
     }
 }

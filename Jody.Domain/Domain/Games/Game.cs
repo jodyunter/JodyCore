@@ -50,118 +50,19 @@ namespace Jody.Domain.Games
 
         public bool IsGameComplete()
         {
-            return false;
+            throw new NotImplementedException();
         }
         public bool IsPeriodComplete()
         {
-            return false;
+            throw new NotImplementedException();
         }
 
-        public void RunFaceOff(Random random)
-        {
-            CarrierPoints = 0;
-            FirstAssist = null;
-            SecondAssist = null;
-
-            var centre1 = Home.Centre;
-            var centre2 = Away.Centre;            
-
-            if (GetResult(random))
-            {
-                PuckCarrier = centre1;
-                centre1.Stats.FaceOffWins++;
-                centre2.Stats.FaceOffLoses++;
-                Offense = GameTeamType.Home;
-            }
-            else
-            {
-                PuckCarrier = centre2;
-                centre2.Stats.FaceOffWins++;
-            }
-        }
-
-        public void AttemptShot(Random random)
-        {
-            //carrier vs available defense
-            if (GetResult(random))
-            {
-                AttemptGoal(random);
-            }
-            else
-            {
-                Scramble(random);
-            }
-        }
-
-        public void AttemptCarry(Random random)
-        {
-            
-        }
-
-        public void AttemptPass(Random random)
-        {
-
-        }
-
-        public void AttemptGoal(Random random)
-        {
-            //carrier vs goalie
-            if (GetResult(random))
-            {
-                //process goal
-            }
-            else
-            {
-                AttemptFreeze(random);
-            }
-        }
-
-        public void Scramble(Random random)
-        {
-            if (GetResult(random))
-            {
-                //reset carrier points if change of posession
-            }
-        }
-        public void ChangePossession()
+          public void ChangePossession()
         {
             CarrierPoints = 0;
             Offense = Offense == GameTeamType.Away ? GameTeamType.Home : GameTeamType.Away;
         }
 
-        public void AttemptFreeze(Random random)
-        {
-            //goalie vs self?
-            if (GetResult(random))
-            {
-                RunFaceOff(random);
-            }
-            else
-            {
-                Scramble(random);
-            }
-        }
-
-        public void NextAction(Random random)
-        {            
-            if (CarrierPoints > 1)
-            {
-                AttemptShot(random);
-            }
-            else
-            {
-                if (GetResult(random))
-                {
-                    AttemptCarry(random);
-                }
-                else
-                {
-                    AttemptPass(random);
-                }
-            }
-            //at the end
-            ProcessAvailability();
-        }
 
         public void MakeAllPlayersAvailable()
         {

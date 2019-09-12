@@ -22,9 +22,9 @@ namespace Jody.Domain.Games.Actions
 
         public override ActionType DefenseActionType { get { return ActionType.Intercept; } }
 
-        public override int GetWinnerTimeOut { get { return 2; }  }
+        public override int GetWinnerTimeOut { get { return 5; }  }
 
-        public override int GetLoserTimeOut { get { return 3; } }
+        public override int GetLoserTimeOut { get { return 5; } }
 
         public override int GetGameTimeSpent { get { return 1; } }
 
@@ -61,19 +61,18 @@ namespace Jody.Domain.Games.Actions
             }            
         }
 
-        public override void PreProcessForAction(Random random)
-        {
-            //nothing to do
-        }
-
         public override void ProcessResultsForAction(Random random)
         {
-            throw new NotImplementedException();
-        }
-
-        public override void ProcessStat(GamePlayer offense, GamePlayer defense)
-        {
-            throw new NotImplementedException();
+            if (!Result)
+            {
+                Game.ChangePossession();
+            }
+            //choose player who gets the puck
+            var team = Game.GetOffense();
+            var receiverPosition = team.GetPositionFromList(RecieverList, random);
+            var receiver = team.GetPlayerByPosition(receiverPosition);
+            Game.PuckCarrier = receiver;
+            Game.CarrierPoints += 1;
         }
 
         public override void SetDefense(Random random)

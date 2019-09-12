@@ -42,17 +42,7 @@ namespace Jody.Domain.Games.Actions
             throw new NotImplementedException();
         }
 
-        public override void PreProcessForAction(Random random)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void ProcessResultsForAction(Random random)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void ProcessStat(GamePlayer offense, GamePlayer defense)
         {
             throw new NotImplementedException();
         }
