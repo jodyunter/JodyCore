@@ -44,6 +44,8 @@ namespace Jody.Domain.Games.Actions
         {
             base.PreProcessForAction(random);
 
+            Game.FirstAssist = null;
+            Game.SecondAssist = null;
             Game.MakeAllPlayersAvailable();
             Game.CarrierPoints = 0;
         }

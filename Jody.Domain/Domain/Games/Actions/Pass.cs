@@ -51,10 +51,15 @@ namespace Jody.Domain.Games.Actions
             {
                 Game.ChangePossession();
             }
+
             //choose player who gets the puck
             var team = Game.GetOffense();
             var receiverPosition = team.GetPositionFromList(RecieverList, random);
             var receiver = team.GetPlayerByPosition(receiverPosition);
+            if (Result)
+            {
+
+            }
             Game.PuckCarrier = receiver;
             Game.CarrierPoints += 1;
         }

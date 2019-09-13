@@ -61,6 +61,8 @@ namespace Jody.Domain.Games
         {
             CarrierPoints = 0;
             Offense = Offense == GameTeamType.Away ? GameTeamType.Home : GameTeamType.Away;
+            FirstAssist = null;
+            SecondAssist = null;
         }
 
 
