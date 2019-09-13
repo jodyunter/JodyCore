@@ -33,9 +33,22 @@ namespace Jody.Domain.Games
         {
             return Offense == GameTeamType.Home ? Away : Home;
         }
+
+        public void SetupStats()
+        {
+            Stats = new GameStats()
+            {
+                Game = this,
+                HomeStats = new GameTeamStats()
+                {
+                    Team = Home.Team
+                }
+           }
+        }
         //game rules, like overtime, total periods, etc
         public void PlayGame(Random random)
         {
+            SetupStats();
             MakeAllPlayersAvailable();
             var firstAction = new Faceoff(this, Output);
             Action action;
