@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Jody.Domain.Games.Actions
+namespace Jody.Domain.Games.Actions.Hockey
 {
-    public class Score:HockeyAction
+    public class Shoot:HockeyAction
     {
-        public Score(Game game, StreamWriter outputWriter) : base(game, outputWriter)
+        public Shoot(Game game, StreamWriter outputWriter) : base(game, outputWriter)
         {
 
         }

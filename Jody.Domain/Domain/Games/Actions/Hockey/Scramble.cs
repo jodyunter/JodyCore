@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Jody.Domain.Games.Actions
+namespace Jody.Domain.Games.Actions.Hockey
 {
     public class Scramble:HockeyAction
     {

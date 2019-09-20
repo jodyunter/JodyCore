@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using static Xunit.Assert;
 using Xunit;
-using Jody.Domain.Games.Actions;
+using Jody.Domain.Games.Actions.Hockey;
 using System.IO;
 using Jody.Domain.Games;
 using System.Linq;

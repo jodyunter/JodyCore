@@ -112,7 +112,7 @@ namespace Jody.Domain.Games.Actions
         public abstract void ProcessResultsForAction(Random random);
 
         public abstract Action GetNextAction(Random random, Action previousAction);
-        public abstract Action CreateAction(ActionType actionType, Action previousAction);
+        public abstract Action CreateAction(ActionType actionType, Game game, StreamWriter outputStream);
         public abstract string GetLogMessage();
         
         public void Log(string outputString)

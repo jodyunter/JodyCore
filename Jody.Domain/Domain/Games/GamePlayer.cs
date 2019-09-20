@@ -51,6 +51,8 @@ namespace Jody.Domain.Games
                     return Player.SavingSkill;
                 case ActionType.Freeze:
                     return Player.FreezingSkill;
+                case ActionType.BeginGame:
+                    return 0; //note this should not be used TODO: find a better way
                 default:
                     throw new Exception("No Action Type for " + actionType);
             }

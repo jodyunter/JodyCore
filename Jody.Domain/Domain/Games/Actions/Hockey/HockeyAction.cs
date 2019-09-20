@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Jody.Domain.Games.Actions
+namespace Jody.Domain.Games.Actions.Hockey
 {
     public abstract class HockeyAction:Action
     {
@@ -12,26 +12,26 @@ namespace Jody.Domain.Games.Actions
 
         }
 
-        public override Action CreateAction(ActionType actionType, Action previousAction)
+        public override Action CreateAction(ActionType actionType, Game game, StreamWriter outputStream)
         {
-            switch (previousAction.ActionType)
+            switch (actionType)
             {
                 case ActionType.FaceOff:
-                    return new Faceoff(previousAction.Game, previousAction.OutputStream);                    
+                    return new Faceoff(game, outputStream);                    
                 case ActionType.Carry:
-                    return new Carry(previousAction.Game, previousAction.OutputStream);
+                    return new Carry(game, outputStream);
                 case ActionType.Pass:
-                    return new Faceoff(previousAction.Game, previousAction.OutputStream);
+                    return new Faceoff(game, outputStream);
                 case ActionType.Shoot:
-                    return new Shoot(previousAction.Game, previousAction.OutputStream);
+                    return new Shoot(game, outputStream);
                 case ActionType.Score:
-                    return new Score(previousAction.Game, previousAction.OutputStream);
+                    return new Score(game, outputStream);
                 case ActionType.Scramble:
-                    return new Scramble(previousAction.Game, previousAction.OutputStream);
+                    return new Scramble(game, outputStream);
                 case ActionType.Freeze:
-                    return new Freeze(previousAction.Game, previousAction.OutputStream);
+                    return new Freeze(game, outputStream);
                 default:
-                    throw new NotImplementedException("Action type :" + previousAction.ActionType + " Hasn't been defined here yet");
+                    throw new NotImplementedException("Action type :" + actionType + " Hasn't been defined here yet");
             }
         }
         public override Action GetNextAction(Random random, Action previousAction)
@@ -75,7 +75,7 @@ namespace Jody.Domain.Games.Actions
                 }
             }
 
-            return CreateAction(next);
+            return CreateAction(next, previousAction.Game, previousAction.OutputStream);
         }
     }
 }

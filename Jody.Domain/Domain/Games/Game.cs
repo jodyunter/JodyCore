@@ -1,8 +1,12 @@
-﻿using Jody.Domain.Games.Actions;
-using System;
+﻿using System;
 using System.IO;
+using Jody.Domain.Games.Actions.Hockey;
 using Action = Jody.Domain.Games.Actions.Action;
 
+/*
+ * TODO:  Need to create a hockey game eventually
+ * 
+ */
 namespace Jody.Domain.Games
 {
     public class Game
@@ -41,9 +45,9 @@ namespace Jody.Domain.Games
                 Game = this,
                 HomeStats = new GameTeamStats()
                 {
-                    Team = Home.Team
+                    Team = Home
                 }
-           }
+            };
         }
         //game rules, like overtime, total periods, etc
         public void PlayGame(Random random)

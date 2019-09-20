@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Jody.Domain.Games.Actions
+namespace Jody.Domain.Games.Actions.Hockey
 {
-    public class Shoot:HockeyAction
+    public class Freeze : HockeyAction
     {
-        public Shoot(Game game, StreamWriter outputWriter) : base(game, outputWriter)
+        public Freeze(Game game, StreamWriter outputStream) :base(game, outputStream)
         {
 
         }
-
         public override ActionType OffenseActionType => throw new NotImplementedException();
 
         public override ActionType DefenseActionType => throw new NotImplementedException();
@@ -22,7 +21,7 @@ namespace Jody.Domain.Games.Actions
 
         public override int GetGameTimeSpent => throw new NotImplementedException();
 
-        public override ActionType ActionType => throw new NotImplementedException();
+        public override ActionType ActionType { get => throw new NotImplementedException(); }
 
         public override string GetLogMessage()
         {
